@@ -4,6 +4,8 @@ from random import randint
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+import smtplib
+from email.mime.text import MIMEText
 
 def open_brower():
     driver = webdriver.Chrome("/Users/SEHYUNICT/Desktop/project/SRT_MACRO/SRT_MACRO/chromedriver")
@@ -85,6 +87,25 @@ def search_train(driver, dpt_stn, arr_stn, dpt_dt, dpt_tm, num_trains_to_check=1
             driver.implicitly_wait(10)
             time.sleep(0.5)
         else:
+            # 세션 생성
+            s = smtplib.SMTP('smtp.gmail.com', 587)
+
+            # TLS 보안 시작
+            s.starttls()
+
+            # 로그인 인증
+            s.login('123', '123')
+
+            # 보낼 메시지 설정
+            msg = MIMEText('srt 예매 성공')
+            msg['Subject'] = 'srt 예매 성공'
+
+            # 메일 보내기
+            s.sendmail("qusrhkdwls45@gmail.com", "qusrhkdwls@sehyunict.com", msg.as_string())
+
+            # 세션 종료
+
+            s.quit()
             break
     driver
 
@@ -92,4 +113,4 @@ def search_train(driver, dpt_stn, arr_stn, dpt_dt, dpt_tm, num_trains_to_check=1
 if __name__ == "__main__":
     driver = open_brower()
     driver = login(driver, '123', '123')
-    search_train(driver, "동탄", "광주송정", "20220505", "08") #기차 출발 시간은 반드시 짝수
+    search_train(driver, "광주송정", "동탄", "20220508", "10") #기차 출발 시간은 반드시 짝수
