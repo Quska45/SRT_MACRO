@@ -10,4 +10,7 @@ if __name__ == "__main__":
     driver = login(driver, '아이디', '비밀번호')
     search_train(driver, "출발역", "도착역", "예매 날짜", "예매시간") #기차 출발 시간은 반드시 짝수
 
-4. python3 macro.py
+4. 메일 발송
+    s.login('123', '123')  여기 코드에 메일주소랑 비밀번호 입력
+
+4. python3 macro.py 실행
